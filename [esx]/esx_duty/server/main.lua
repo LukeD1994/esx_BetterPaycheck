@@ -53,6 +53,7 @@ AddEventHandler('duty:ambulance', function(job)
     end
 end)
 
+--Use this as an example of how to add a new duty!
 RegisterServerEvent('duty:fire')
 AddEventHandler('duty:fire', function(job)
 
@@ -75,6 +76,10 @@ AddEventHandler('duty:fire', function(job)
         xPlayer.setJob('fire', 3)
     end
 end)
+
+--Add new duties here!
+
+-- ^
 
 --notification
 function sendNotification(xSource, message, messageType, messageTimeout)
