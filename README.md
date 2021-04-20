@@ -30,6 +30,58 @@ TriggerServerEvent('esx_paycheck:ClockOut')
 -- This event will automatically call the clock in event and log their start time, and set them as working
 TriggerServerEvent('esx_paycheck:ClockIn')
 ```
+## For esx_duty based roles, you will need to do the following
+1) Client/Main.lua
+```lua
+
+-- Take the below example and place a copy of it in the client/main.lua file. Then change the names for the new job you're adding
+-- All you need to change is the references to "fire", i.e "fire_duty" becomes "newJob_duty", etc
+if CurrentAction == 'fire_duty' then
+                    if PlayerData.job.name == 'fire' or PlayerData.job.name == 'offfire' then
+                        TriggerServerEvent('duty:fire')
+                        if PlayerData.job.name == 'fire' then
+                            sendNotification(_U('offduty'), 'success', 2500)
+                            TriggerServerEvent('esx_paycheck:ClockOut')
+                            Wait(1000)
+                        else
+                            sendNotification(_U('onduty'), 'success', 2500)
+                            TriggerServerEvent('esx_paycheck:ClockIn')
+                            Wait(1000)
+                        end
+                    else
+                        sendNotification(_U('notfire'), 'error', 5000) 
+                        -- "notfire" here is a translated entry, look inside "translations/en.lua" and add a new one for "notMyNewJob"
+                        Wait(1000)
+                    end
+                end
+```
+2) Server/main.lua
+```lua
+-- Same as before, replace anything refering it "fire" with "yourjobhere"
+RegisterServerEvent('duty:fire')
+AddEventHandler('duty:fire', function(job)
+
+        local _source = source
+        local xPlayer = ESX.GetPlayerFromId(_source)
+
+    -- IMPORTANT: If your job has more than 3 grades to it in your database, you'll need to add extra entries for those too!
+    if xPlayer.job.name == 'fire' and xPlayer.job.grade == 1 then
+        xPlayer.setJob('offfire', 1)
+    elseif xPlayer.job.name == 'fire' and xPlayer.job.grade == 2 then
+        xPlayer.setJob('offfire', 2)
+    elseif xPlayer.job.name == 'fire' and xPlayer.job.grade == 3 then
+        xPlayer.setJob('offfire', 3)
+    end
+
+    if xPlayer.job.name == 'offfire' and xPlayer.job.grade == 1 then
+        xPlayer.setJob('fire', 1)
+    elseif xPlayer.job.name == 'offfire' and xPlayer.job.grade == 2 then
+        xPlayer.setJob('fire', 2)
+    elseif xPlayer.job.name == 'offfire' and xPlayer.job.grade == 3 then
+        xPlayer.setJob('fire', 3)
+    end
+end)
+```
 
 # Credits
 - OfficialLukeD - For these script changes
