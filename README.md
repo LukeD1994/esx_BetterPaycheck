@@ -32,8 +32,8 @@ TriggerServerEvent('esx_paycheck:ClockIn')
 ```
 
 # Credits
-OfficialLukeD - For these script changes
-The folks behind PlumeESX and ESX
+- OfficialLukeD - For these script changes
+- The folks behind PlumeESX and ESX
 
 # Dependancies
 PlumeESX (ESX v1 final, aka 1.2.0)
