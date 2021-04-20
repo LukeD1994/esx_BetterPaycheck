@@ -115,24 +115,28 @@ Citizen.CreateThread(function()
                         Wait(1000)
                     end
                 end
-
+                
+                -- Use everything below as an example, up to the "insert other roles here!" line
                 if CurrentAction == 'fire_duty' then
-                  if PlayerData.job.name == 'fire' or PlayerData.job.name == 'offfire' then
-                      TriggerServerEvent('duty:fire')
-                      if PlayerData.job.name == 'fire' then
-                          sendNotification(_U('offduty'), 'success', 2500)
-                          TriggerServerEvent('esx_paycheck:ClockOut')
-                          Wait(1000)
-                      else
-                          sendNotification(_U('onduty'), 'success', 2500)
-                          TriggerServerEvent('esx_paycheck:ClockIn')
-                          Wait(1000)
-                      end
-                  else
-                      sendNotification(_U('notfire'), 'error', 5000)
-                      Wait(1000)
-                  end
-              end
+                    if PlayerData.job.name == 'fire' or PlayerData.job.name == 'offfire' then
+                        TriggerServerEvent('duty:fire')
+                        if PlayerData.job.name == 'fire' then
+                            sendNotification(_U('offduty'), 'success', 2500)
+                            TriggerServerEvent('esx_paycheck:ClockOut')
+                            Wait(1000)
+                        else
+                            sendNotification(_U('onduty'), 'success', 2500)
+                            TriggerServerEvent('esx_paycheck:ClockIn')
+                            Wait(1000)
+                        end
+                    else
+                        sendNotification(_U('notfire'), 'error', 5000)
+                        Wait(1000)
+                    end
+                end
+
+                -- Insert other roles here!
+                
             end
         end
     end
