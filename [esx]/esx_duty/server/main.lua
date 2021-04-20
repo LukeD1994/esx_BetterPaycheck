@@ -10,6 +10,7 @@ AddEventHandler('duty:police', function(job)
 
     if xPlayer.job.name == 'police' and xPlayer.job.grade == 1 then
         xPlayer.setJob('offpolice', 1)
+        
     elseif xPlayer.job.name == 'police' and xPlayer.job.grade == 2 then
         xPlayer.setJob('offpolice', 2)
     elseif xPlayer.job.name == 'police' and xPlayer.job.grade == 3 then
@@ -49,6 +50,29 @@ AddEventHandler('duty:ambulance', function(job)
         xPlayer.setJob('ambulance', 2)
     elseif xPlayer.job.name == 'offambulance' and xPlayer.job.grade == 3 then
         xPlayer.setJob('ambulance', 3)
+    end
+end)
+
+RegisterServerEvent('duty:fire')
+AddEventHandler('duty:fire', function(job)
+
+        local _source = source
+        local xPlayer = ESX.GetPlayerFromId(_source)
+
+    if xPlayer.job.name == 'fire' and xPlayer.job.grade == 1 then
+        xPlayer.setJob('offfire', 1)
+    elseif xPlayer.job.name == 'fire' and xPlayer.job.grade == 2 then
+        xPlayer.setJob('offfire', 2)
+    elseif xPlayer.job.name == 'fire' and xPlayer.job.grade == 3 then
+        xPlayer.setJob('offfire', 3)
+    end
+
+    if xPlayer.job.name == 'offfire' and xPlayer.job.grade == 1 then
+        xPlayer.setJob('fire', 1)
+    elseif xPlayer.job.name == 'offfire' and xPlayer.job.grade == 2 then
+        xPlayer.setJob('fire', 2)
+    elseif xPlayer.job.name == 'offfire' and xPlayer.job.grade == 3 then
+        xPlayer.setJob('fire', 3)
     end
 end)
 
